@@ -22,11 +22,12 @@ apply plugin: 'io.spring.dependency-management'
 
 repositories {
 	mavenCentral()
+	maven { url "https://maven.vaadin.com/vaadin-addons" }
 }
 
 
 ext {
-	vaadinVersion = '8.4.4'
+	vaadinVersion = '10.0.1'
 }
 
 eclipse {
@@ -42,14 +43,14 @@ lombok {
 }
 
 dependencies {
-	compile 'com.vaadin:vaadin-spring-boot-starter'	
 	
-	compileOnly 'org.projectlombok:lombok:1.18.0'	
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("com.vaadin:vaadin-spring-boot-starter")
+    compile("com.h2database:h2")
+    testCompile("junit:junit")
+    testCompile("org.springframework.boot:spring-boot-starter-test")	
 	
-	testCompile'org.springframework.boot:spring-boot-starter-test'
-		
-	runtime'com.h2database:h2'
-	
+	compileOnly 'org.projectlombok:lombok:1.18.0'
 	apt 'org.projectlombok:lombok:1.18.0'
 }
 
