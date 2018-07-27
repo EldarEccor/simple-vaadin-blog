@@ -1,4 +1,4 @@
-package de.eldar.simplevaadinblog.layout;
+package de.eldar.simplevaadinblog.view;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +10,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import de.eldar.simplevaadinblog.pojo.BlogPost;
 
-public class BlogPostLayout extends VerticalLayout {
+public class BlogPostView extends VerticalLayout {
 
 	private static final long serialVersionUID = 3316505466501001318L;
 
@@ -18,7 +18,7 @@ public class BlogPostLayout extends VerticalLayout {
 
 	private Div body;
 
-	public BlogPostLayout(BlogPost toDisplay) {
+	public BlogPostView(BlogPost toDisplay) {
 		setClassName("blogpost");
 
 		Date creationDate = toDisplay.getCreationDate();
