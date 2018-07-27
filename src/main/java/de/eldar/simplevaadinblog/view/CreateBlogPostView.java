@@ -28,6 +28,7 @@ public class CreateBlogPostView extends VerticalLayout{
 	private final HorizontalLayout buttonBar = new HorizontalLayout(submit);
 
 	public CreateBlogPostView(BlogPost formBean) {
+		setClassName("createpost");
 		add(titleField);
 		initFormLayout();		
 		initButtonBar();
@@ -45,7 +46,7 @@ public class CreateBlogPostView extends VerticalLayout{
 	}
 
 	private void initBinder() {
-		binder = new Binder<BlogPost>();
+		binder = new Binder<>();
 		binder.forField(author).bind(BlogPost::getAuthor,
 				BlogPost::setAuthor);
 		binder.forField(body).bind(BlogPost::getBody, BlogPost::setBody);
@@ -57,7 +58,7 @@ public class CreateBlogPostView extends VerticalLayout{
 
 	private void initButtonBar() {
 		submit.setAutofocus(true);
-		submit.getElement().setAttribute("theme", "primary");		
+		submit.getElement().setAttribute("theme", "primary");	
 		buttonBar.setClassName("buttons");
 		buttonBar.setSpacing(true);
 		add(buttonBar);
