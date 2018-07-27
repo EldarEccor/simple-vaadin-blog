@@ -1,18 +1,7 @@
-buildscript {
-	ext {
-		springBootVersion = '2.0.3.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
-}
-
 plugins {
     id 'net.ltgt.apt' version '0.10'
     id 'io.franzbecker.gradle-lombok' version '1.14'
+    id "org.springframework.boot" version "2.0.3.RELEASE"
 }
 
 apply plugin: 'java'
