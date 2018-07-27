@@ -1,5 +1,6 @@
 package de.eldar.simplevaadinblog.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,18 +11,16 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity(name="BLOG_POST")
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class BlogPost {
+public class BlogPost implements Serializable{
 	
+	private static final long serialVersionUID = 5868211068486984843L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
