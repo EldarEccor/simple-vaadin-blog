@@ -15,12 +15,5 @@ cache:
 
 script:
   - ./gradlew check
-  - ./gradlew codeCoverageReport --continue
-
-after_success:
-  
-deploy:
-  
-notifications:
-  
+  - ./gradlew codeCoverageReport --continue 
  
