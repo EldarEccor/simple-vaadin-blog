@@ -9,6 +9,9 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
+
+apply plugin: 'jacoco'
+
 repositories {
 	mavenCentral()
 	maven { url "https://maven.vaadin.com/vaadin-addons" }
@@ -17,6 +20,8 @@ repositories {
 
 ext {
 	vaadinVersion = '10.0.1'
+	// Has to be 1.16.20 as 1.18 failed with gradle 4.9 & jdk8
+	lombokVersion = '1.16.20'
 }
 
 eclipse {
@@ -27,20 +32,28 @@ eclipse {
 }
 
 lombok {
-	version = '1.18.0'
+	version = lombokVersion
 	sha256 = ""
 }
 
-dependencies {
-	
+test {
+    reports {
+        junitXml.enabled = false
+        html.enabled = true
+    }               
+}
+
+dependencies {	
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("com.vaadin:vaadin-spring-boot-starter")
     compile("com.h2database:h2")
+    
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")	
 	
-	compileOnly 'org.projectlombok:lombok:1.18.0'
-	apt 'org.projectlombok:lombok:1.18.0'
+	apt "org.projectlombok:lombok:${lombokVersion}"
 }
 
 dependencyManagement {
@@ -52,3 +65,16 @@ dependencyManagement {
 group = 'de.eldar'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+
+task codeCoverageReport(type: JacocoReport, dependsOn: test) {
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+    sourceDirectories = files(sourceSets.main.allSource.srcDirs)
+    classDirectories = files(sourceSets.main.output)
+
+    reports {
+        xml.enabled true
+        xml.destination "${buildDir}/reports/jacoco/report.xml"
+        csv.enabled false
+        html.destination file("${buildDir}/reports/jacoco-html")
+    }
+}
